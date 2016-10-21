@@ -1,4 +1,5 @@
-setwd("C:/Man")
+setwd("~/aamas/manip/data")
+
 library(igraph)
 e1 = read.csv("socialnetwork.txt", header  =  FALSE, sep = ' ')
 e2 = read.csv("socialnetwork2.txt", header = FALSE, sep = ' ')
@@ -94,6 +95,8 @@ dendPlot(ceb_er, mode="hclust")
 plot(ceb_er, er, vertex.label = NA, edge.arrow.size=0.3, vertex.size = 3, layout = layout_in_circle(er)) 
 length(ceb_er)
 modularity(ceb_er)
+
+
 #Modularity comes out to be 0.02173015
 
 
@@ -101,5 +104,10 @@ modularity(ceb_er)
 clp2 <- cluster_label_prop(sn2)
 plot(clp2, sn2, vertex.label = NA, edge.arrow.size=0.01, vertex.size = 3) 
 
-
-
+str(V(sn2)$name)
+V(sn2)$id = c(1:53)
+str(V(sn1)$name)
+V(sn1)$id = c(1:59)
+str(V(sn1)$id)
+write.graph(sn1, "anon_follow.net" , format = "pajek")
+write.graph(sn2, "anon_upvote.net" , format = "pajek")
